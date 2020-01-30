@@ -1,3 +1,6 @@
+import os
+
+
 def inputs() -> [str, int]:
     term = input("Please enter your search term: ")
     while True:
@@ -9,4 +12,9 @@ def inputs() -> [str, int]:
     return(term, result_count)
 
 
-print(inputs())
+def data_to_dictionary() -> dict:
+    data = {}
+    # I do not know how this code segment works.
+    for root, dirs, files in os.walk("Data"):
+        for filename in files:
+            data[filename[:-4]] = "data"
