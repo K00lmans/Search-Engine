@@ -32,16 +32,21 @@ def data_to_dictionary() -> dict:
 
 
 def word_matcher(term, data: dict) -> list:
+    """Main search loop"""
     results = []
+    # If there is only one term, look through it once
     if type(term) == str:
+        # If the term is in the list of names, find it and add it to results
         if term in data:
             for file_name in data:
                 if term in file_name:
                     results.append(file_name)
+        # After, check through all the data for the term, then add to results
         for file_name in data:
             for file_data in data[file_name]:
                 if term in file_data:
                     results.append(file_name)
+    # If there are mor than one term, do the above with each term one at a time
     elif type(term) == list:
         for word in term:
             if term in data:
@@ -52,16 +57,23 @@ def word_matcher(term, data: dict) -> list:
                 for file_data in data[file_name]:
                     if term in file_data:
                         results.append(file_name)
+    # Should never run
+    else:
+        while True:
+            print("Somthing went very wrong, please restart.")
     return results
 
 
 def word_splitter(term: str) -> list:
+    """Splits the term"""
     split_term = []
+    # Removes items that may clog the search
     for item in REMOVABLES:
         while item in term:
             item.replace(item, "")
+    # If there are things that seperate words in the term, seperate them
     for item in SEPARATORS:
-        if item in term:
+        while item in term:
             split_term = term.split(item)
     return split_term
 
