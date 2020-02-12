@@ -37,7 +37,7 @@ def word_matcher(term, data: dict, results: list, result_count: int) -> list:
     if type(term) == str:
         for data_item in data:
             # If the term is in one of the titles, add to results
-            if term in data_item.lower():
+            if term in data_item.lower() and data_item not in results:
                 results.append(data_item)
         if result_count > len(results):
             for data_item in data:
@@ -48,16 +48,17 @@ def word_matcher(term, data: dict, results: list, result_count: int) -> list:
         for each_term in term:
             for data_item in data:
                 # If the term is in one of the titles, add to results
-                if each_term in data_item.lower():
-                    results.append(data_item)
+                if each_term in data_item.lower() and data_item not in results:
+                        results.append(data_item)
             for data_item in data:
                 # If the term is in content of a document, and the document has not already been added, add to results
                 if each_term in data[data_item].lower() and data_item not in results:
                     results.append(data_item)
     # Should never run
     else:
+        print("Something went very wrong, please restart.")
         while True:
-            print("Something went very wrong, please restart.")
+            pass
     return results
 
 
@@ -71,6 +72,10 @@ def word_splitter(term: str):
     for item in SEPARATORS:
         if item in term:
             term = term.split(item)
+    if type(term) == list:
+        for item in term:
+            if item == "":
+                term.remove(item)
     return term
 
 
@@ -81,9 +86,5 @@ results = word_matcher(term, data, results, result_count)
 # Only does secondary check if max results has not been found
 if len(results) < result_count:
     term = word_splitter(term)
-    terms = word_matcher(term, data, results, result_count)
-    # Makes sure no duplicates are added on the second check through
-    for item in terms:
-        if item not in results:
-            results.append(item)
+    new_results = word_matcher(term, data, results, result_count)
 print(results)
