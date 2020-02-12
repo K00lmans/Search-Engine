@@ -2,12 +2,12 @@ from os import walk
 
 
 SEPARATORS = (" ", "-")
-REMOVABLES = (".", ",", ";", "(", ")")
+REMOVABLES = (".", ",", ";", "(", ")", "[", "]", "{", "}")
 
 
 def inputs() -> [str, int]:
     """Takes the constraints from the user for the search"""
-    term = input("Please enter your search term: ")
+    term = input("Please enter your search term: ").lower()
     # Asks for the number of results the the user would like to see, and makes sure it is an int
     while True:
         try:
@@ -31,55 +31,59 @@ def data_to_dictionary() -> dict:
     return data
 
 
-def word_matcher(term, data: dict) -> list:
+def word_matcher(term, data: dict, results: list, result_count: int) -> list:
     """Main search loop"""
-    results = []
     # If there is only one term, look through it once
     if type(term) == str:
-        # If the term is in the list of names, find it and add it to results
-        if term in data:
-            for file_name in data:
-                if term in file_name:
-                    results.append(file_name)
-        # After, check through all the data for the term, then add to results
-        for file_name in data:
-            for file_data in data[file_name]:
-                if term in file_data:
-                    results.append(file_name)
-    # If there are mor than one term, do the above with each term one at a time
+        for data_item in data:
+            # If the term is in one of the titles, add to results
+            if term in data_item.lower():
+                results.append(data_item)
+        if result_count > len(results):
+            for data_item in data:
+                # If the term is in content of a document, and the document has not already been added, add to results
+                if term in data[data_item].lower() and data_item not in results:
+                    results.append(data_item)
     elif type(term) == list:
-        for word in term:
-            if term in data:
-                for file_name in data:
-                    if term in file_name:
-                        results.append(file_name)
-            for file_name in data:
-                for file_data in data[file_name]:
-                    if term in file_data:
-                        results.append(file_name)
+        for each_term in term:
+            for data_item in data:
+                # If the term is in one of the titles, add to results
+                if each_term in data_item.lower():
+                    results.append(data_item)
+            for data_item in data:
+                # If the term is in content of a document, and the document has not already been added, add to results
+                if each_term in data[data_item].lower() and data_item not in results:
+                    results.append(data_item)
     # Should never run
     else:
         while True:
-            print("Somthing went very wrong, please restart.")
+            print("Something went very wrong, please restart.")
     return results
 
 
-def word_splitter(term: str) -> list:
+def word_splitter(term: str):
     """Splits the term"""
-    split_term = []
     # Removes items that may clog the search
     for item in REMOVABLES:
         while item in term:
-            item.replace(item, "")
-    # If there are things that seperate words in the term, seperate them
+            term = term.replace(item, "")
+    # If there are things that separates words in the term, separate them
     for item in SEPARATORS:
-        while item in term:
-            split_term = term.split(item)
-    return split_term
+        if item in term:
+            term = term.split(item)
+    return term
 
 
+results = []
 term, result_count = inputs()
 data = data_to_dictionary()
-results = word_matcher(term, data)
-term = word_splitter(term)
-results = word_matcher(term, data)
+results = word_matcher(term, data, results, result_count)
+# Only does secondary check if max results has not been found
+if len(results) < result_count:
+    term = word_splitter(term)
+    terms = word_matcher(term, data, results, result_count)
+    # Makes sure no duplicates are added on the second check through
+    for item in terms:
+        if item not in results:
+            results.append(item)
+print(results)
