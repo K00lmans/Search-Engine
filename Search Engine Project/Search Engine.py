@@ -1,7 +1,8 @@
 from os import walk
+from time import time
 
-SEPARATORS = (" ", "-", "_")
-REMOVABLES = (".", ",", ";", "(", ")", "[", "]", "{", "}", "!", "?")
+SEPARATORS = (" ", "-", "_", ":", "|", "~")
+REMOVABLES = (".", ",", ";", "(", ")", "[", "]", "{", "}", "!", "?", "'", '"', "<", ">", "/", "`")
 
 
 def inputs() -> [str, int]:
@@ -79,7 +80,7 @@ def word_splitter(term: str):
     return term
 
 
-def result_print(result_list: list, result_count: int):
+def result_print(result_list: list, result_count: int, search_start_time: float):
     print("")  # All of these are for spacing alone
     # If no results are found, loop until user closes program
     if not result_list:
@@ -91,6 +92,8 @@ def result_print(result_list: list, result_count: int):
     # Prints out all the results one line at a time
     for item in enumerate(result_list):
         print(f"{item[0] + 1}: {item[1]}")
+    print("")
+    print(f"It took {round((time() - search_start_time), 1)} seconds to find these results.")
     print("")
     while True:
         try:
@@ -111,9 +114,10 @@ def result_print(result_list: list, result_count: int):
 results = []
 term, result_count = inputs()
 data = data_to_dictionary()
+search_start_time = time()
 results = word_matcher(term, data, results, result_count)
 # Only does secondary check if max results has not been found
 if len(results) < result_count:
     term = word_splitter(term)
     new_results = word_matcher(term, data, results, result_count)
-result_print(results, result_count)
+result_print(results, result_count, search_start_time)
