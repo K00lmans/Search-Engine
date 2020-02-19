@@ -1,0 +1,21 @@
+A minor-planet group is a population of minor planets that share broadly similar orbits. Members are generally unrelated to each other, unlike in an asteroid family, which often results from the break-up of a single asteroid. It is customary to name a group of asteroids after the first member of that group to be discovered, which is often the largest.
+
+Vulcanoid asteroids are hypothetical asteroids that orbit entirely within the orbit of Mercury (have an aphelion of less than 0.3874 AU). A few searches for vulcanoids have been conducted but none have been discovered so far.
+
+Atira asteroids (Apohele; Interior-Earth Objects) are a small group of known asteroids whose aphelion is less than 0.983 AU, meaning they orbit entirely within Earth's orbit. The group is named after its first confirmed member, 163693 Atira. As of 2019, the group consists of 19 members, 6 of which are numbered.
+
+Mercury-crosser asteroids having a perihelion smaller than Mercury's 0.3075 AU.
+
+Venus-crosser asteroids having a perihelion smaller than Venus's 0.7184 AU. This group includes the above Mercury-crossers (if their aphelion is greater than Venus's perihelion. All known Mercury crossers satisfy this condition).
+
+Earth-crosser asteroids having a perihelion smaller than Earth's 0.9833 AU. This group includes the above Mercury- and Venus-crossers, apart from the Apoheles. They are also divided into the
+
+Aten asteroids having a semi-major axis less than 1 AU, named after 2062 Aten.
+
+Apollo asteroids having a semi-major axis greater than 1 AU, named after 1862 Apollo.
+
+Arjuna asteroids are somewhat vaguely defined as having orbits similar to Earth's; i.e. with an average orbital radius of around 1 AU and with low eccentricity and inclination. Due to the vagueness of this definition some asteroids belonging to the Atira, Amor, Apollo or Aten groups can also be classified as Arjunas. The term was introduced by Spacewatch and does not refer to an existing asteroid; examples of Arjunas include 1991 VG.
+
+Earth trojans are asteroids located in the Earth–Sun Lagrangian points L4 and L5. Their location in the sky as observed from Earth's surface would be fixed at about 60 degrees east and west of the Sun, and as people tend to search for asteroids at much greater elongations few searches have been done in these locations. The only known Earth trojan is 2010 TK7.
+
+Near-Earth asteroids is a catch-all term for asteroids whose orbit closely approaches that of Earth. It includes almost all of the above groups, as well as the Amor asteroids.

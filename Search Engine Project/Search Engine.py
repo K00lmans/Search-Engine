@@ -1,7 +1,7 @@
 from os import walk
 
-SEPARATORS = (" ", "-")
-REMOVABLES = (".", ",", ";", "(", ")", "[", "]", "{", "}")
+SEPARATORS = (" ", "-", "_")
+REMOVABLES = (".", ",", ";", "(", ")", "[", "]", "{", "}", "!", "?")
 
 
 def inputs() -> [str, int]:
