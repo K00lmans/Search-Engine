@@ -1,0 +1,5 @@
+Teal is a blue-green colour. Its name comes from that of a bird—the common teal (Anas crecca)—which presents a similarly colored stripe on its head. The word is often used colloquially to refer to shades of cyan in general.
+
+It can be created by mixing blue into a green base, or deepened as needed with black or gray. The complementary color of teal is maroon. It is also one of the initial group of 16 HTML/CSS web colors formulated in 1987. In the RGB model used to create colors on computer screens and televisions, teal is created by turning down the brightness of cyan to about one half.
+
+Teal was a fad color during the 1990s, with, among others, many sports teams adopting the color for their uniforms.

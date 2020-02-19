@@ -1,6 +1,5 @@
 from os import walk
 
-
 SEPARATORS = (" ", "-")
 REMOVABLES = (".", ",", ";", "(", ")", "[", "]", "{", "}")
 
@@ -49,7 +48,7 @@ def word_matcher(term, data: dict, results: list, result_count: int) -> list:
             for data_item in data:
                 # If the term is in one of the titles, add to results
                 if each_term in data_item.lower() and data_item not in results:
-                        results.append(data_item)
+                    results.append(data_item)
             for data_item in data:
                 # If the term is in content of a document, and the document has not already been added, add to results
                 if each_term in data[data_item].lower() and data_item not in results:
@@ -72,11 +71,41 @@ def word_splitter(term: str):
     for item in SEPARATORS:
         if item in term:
             term = term.split(item)
+    # If there is empty str items in the list, remove them
     if type(term) == list:
         for item in term:
             if item == "":
                 term.remove(item)
     return term
+
+
+def result_print(result_list: list, result_count: int):
+    print("")  # All of these are for spacing alone
+    # If no results are found, loop until user closes program
+    if not result_list:
+        print("No Results Found")
+        while True:
+            pass
+    # Removes results, so that it is only the number of results the user specified
+    result_list = result_list[0:result_count]
+    # Prints out all the results one line at a time
+    for item in enumerate(result_list):
+        print(f"{item[0] + 1}: {item[1]}")
+    print("")
+    while True:
+        try:
+            result_choice = int(input("Which file would you like to open. Put the number by its name: "))
+            print("")
+            with open(f".\\Data\\{result_list[result_choice - 1]}.txt") as file:
+                print(file.read())
+                print("")
+                # If the user does not want to look at another article, break our of the loop, allowing the function to end
+                if (input("Would you like to open another article? (Y/N): ").lower()) == "n":
+                    break
+        # If the input provided by the user is not a number, or a possible number, repeat the code
+        except (ValueError, IndexError):
+            print("Please only enter a number that is listed next to the file names.")
+    print("")
 
 
 results = []
@@ -87,4 +116,4 @@ results = word_matcher(term, data, results, result_count)
 if len(results) < result_count:
     term = word_splitter(term)
     new_results = word_matcher(term, data, results, result_count)
-print(results)
+result_print(results, result_count)
